@@ -4,6 +4,7 @@ use crate::ray_intersect::RayIntersect;
 pub struct Sphere {
     pub center: Vector3,
     pub radius: f32,
+    pub color: Color,
 }
 
 impl RayIntersect for Sphere {

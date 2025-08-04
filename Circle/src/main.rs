@@ -19,11 +19,12 @@ pub fn cast_ray(
 ) -> Color {
     for object in objects {
         if object.ray_intersect(ray_origin, ray_direction) {
-            return Color::new(100, 255, 1, 255);
+            return object.color;
         }
     }
-    Color::new(4, 12, 36, 255)
+    Color::new(4, 12, 36, 255) // color del fondo
 }
+
 
 pub fn render(framebuffer: &mut Framebuffer, objects: &[Sphere]) {
     let width = framebuffer.width as f32;
@@ -66,10 +67,82 @@ fn main() {
 
     framebuffer.set_background_color(Color::new(4, 12, 36, 255));
 
-    let objects = [Sphere {
-        center: Vector3::new(0.0, 0.0, -5.0),
-        radius: 1.0,
-    }];
+    let objects = [
+        // Cuerpo
+        Sphere {
+            center: Vector3::new(0.0, -1.0, -6.0),
+            radius: 1.5,
+            color: Color::new(181, 101, 29, 255),
+        },
+        // Cabeza
+        Sphere {
+            center: Vector3::new(0.0, 1.0, -6.0),
+            radius: 1.0,
+            color: Color::new(160, 82, 45, 255),
+        },
+        // Oreja izquierda
+        Sphere {
+            center: Vector3::new(-0.8, 2.0, -6.0),
+            radius: 0.3,
+            color: Color::new(139, 69, 19, 255),
+        },
+        // Oreja derecha
+        Sphere {
+            center: Vector3::new(0.8, 2.0, -6.0),
+            radius: 0.3,
+            color: Color::new(139, 69, 19, 255),
+        },
+        // Brazo izquierdo
+        Sphere {
+            center: Vector3::new(-1.5, 0.0, -6.0),
+            radius: 0.4,
+            color: Color::new(160, 82, 45, 255),
+        },
+        // Brazo derecho
+        Sphere {
+            center: Vector3::new(1.5, 0.0, -6.0),
+            radius: 0.4,
+            color: Color::new(160, 82, 45, 255),
+        },
+        // Pierna izquierda
+        Sphere {
+            center: Vector3::new(-0.7, -2.3, -6.0),
+            radius: 0.5,
+            color: Color::new(139, 69, 19, 255),
+        },
+        // Pierna derecha
+        Sphere {
+            center: Vector3::new(0.7, -2.3, -6.0),
+            radius: 0.5,
+            color: Color::new(139, 69, 19, 255),
+        },
+        // Hocico
+        Sphere {
+            center: Vector3::new(0.0, 0.8, -5.0),
+            radius: 0.3,
+            color: Color::new(255, 228, 196, 255),
+        },
+        // Nariz
+        Sphere {
+            center: Vector3::new(0.0, 0.9, -4.8),
+            radius: 0.1,
+            color: Color::BLACK,
+        },
+        // Ojo izquierdo
+        Sphere {
+            center: Vector3::new(-0.3, 1.2, -5.2),
+            radius: 0.08,
+            color: Color::BLACK,
+        },
+        // Ojo derecho
+        Sphere {
+            center: Vector3::new(0.3, 1.2, -5.2),
+            radius: 0.08,
+            color: Color::BLACK,
+        },
+    ];
+
+
 
     while !rl.window_should_close() {
         framebuffer.clear();
